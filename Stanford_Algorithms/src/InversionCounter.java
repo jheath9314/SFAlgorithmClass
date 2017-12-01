@@ -1,30 +1,68 @@
 import java.util.List;
 
 public class InversionCounter {
-	
-	private int count = 0;
-	
-	public int getCount() {
-		return count;
+
+	private long inversionCount = 0;
+
+	public long getInversionCount() {
+		return inversionCount;
 	}
 
-	private Integer[] testList = new Integer[] {1,3,2,4,5,6};
-	
-	public Integer sortAndCount(List<Integer> invList)
-	{
-		if (invList.size() == 0)
-		{
-			return 0;
+	public void mergeSort(int[] input) {
+		if (input.length < 2) {
+			return;
 		}
-		//use this to split the array in 2
-		//invList.subList(0, (invList.size() - 1) / 2);
-		//invList.subList((invList.size() - 1) / 2, invList.size() - 1 );
-		return null;
+
+		int[] leftArray = new int[input.length / 2];
+		int[] rightArray = new int[input.length - (input.length / 2)];
+
+		for (int i = 0; i < leftArray.length; i++) {
+			leftArray[i] = input[i];
+		}
+
+		for (int i = 0; i < rightArray.length; i++) {
+			rightArray[i] = input[(input.length / 2) + i];
+		}
+
+		mergeSort(leftArray);
+		mergeSort(rightArray);
+		merge(leftArray, rightArray, input);
+
 	}
-	
-	public List<Integer> mergeAndCountSplit(List<Integer> invList)
-	{
-		
-		return null;
+
+	public void merge(int[] leftArray, int[] rightArray, int[] input) {
+		int i = 0;
+		int j = 0;
+		int k = 0;
+
+		while (i < leftArray.length && j < rightArray.length) {
+
+			if (leftArray[i] < rightArray[j]) {
+				input[k] = leftArray[i];
+				k++;
+				i++;
+
+			} else {
+				input[k] = rightArray[j];
+				j++;
+				k++;
+				inversionCount += leftArray.length - i;
+			}
+
+		}
+
+		while (i < leftArray.length) {
+			input[k] = leftArray[i];
+			i++;
+			k++;
+		}
+
+		while (j < rightArray.length) {
+			input[k] = rightArray[j];
+			k++;
+			j++;
+		}
+
 	}
+
 }
