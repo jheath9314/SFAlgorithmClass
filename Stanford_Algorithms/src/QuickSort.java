@@ -1,8 +1,9 @@
 
 public class QuickSort {
 
-	private static int totalLowComparisons = 0;
-	private static int totalLastComparisons = 0;
+	private int totalLowComparisons = 0;
+	private int totalLastComparisons = 0;
+	private int totalMixComparisons = 0;
 
 	public enum partitionTypeType {
 		FIRST, LAST, MIX
@@ -20,6 +21,11 @@ public class QuickSort {
 		return totalLastComparisons;
 	}
 
+	public int getTotalMixComparisons() {
+
+		return totalMixComparisons;
+	}
+
 	public void quickSort(int[] arr, int low, int high) {
 		if (high - low <= 0) {
 
@@ -32,7 +38,7 @@ public class QuickSort {
 			quickSort(arr, low, pivot - 1);
 			quickSort(arr, pivot + 1, high);
 
-			totalLastComparisons = totalLastComparisons + high - low;
+			totalMixComparisons = totalMixComparisons + high - low;
 		}
 
 	}
@@ -51,8 +57,34 @@ public class QuickSort {
 			p = arr[high];
 			partitionIndex = high;
 		} else {
-			p = 4;
-			partitionIndex = 4;
+
+			// the mix condition
+			int middleIndex = (high + low) / 2;
+			int middleValue = arr[middleIndex];
+			int firstValue = arr[low];
+			int lastValue = arr[high];
+
+			if ((middleValue < firstValue && middleValue > lastValue)
+					|| (middleValue > firstValue && middleValue < lastValue)) {
+
+				// middle index is median
+				partitionIndex = middleIndex;
+				p = arr[middleIndex];
+
+			} else if ((firstValue < middleValue && firstValue > lastValue)
+					|| (firstValue > middleValue && firstValue < lastValue)) {
+				// first is the median
+				partitionIndex = low;
+				p = arr[low];
+			}
+
+			else {
+				// last is the median
+				partitionIndex = high;
+				p = arr[high];
+
+			}
+
 		}
 
 		swap(arr, low, partitionIndex);
@@ -68,7 +100,7 @@ public class QuickSort {
 			}
 		}
 
-		swap(arr, low, i - 1); // i - 1?
+		swap(arr, low, i - 1);
 		return i - 1;
 	}
 

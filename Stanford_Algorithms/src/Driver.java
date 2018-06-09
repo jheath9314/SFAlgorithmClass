@@ -55,5 +55,6 @@ public class Driver {
 		
 		System.out.println("Total comparisons low: " + mySorter.getTotalLowComparisons());
 		System.out.println("Total comparisons last: " + mySorter.getTotalLastComparisons());
+		System.out.println("Total comparisons Mix: " + mySorter.getTotalMixComparisons());
 	}
 }
