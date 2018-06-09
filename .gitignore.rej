@@ -1,0 +1,4 @@
+diff a/.gitignore b/.gitignore	(rejected hunks)
+@@ -0 +1,2 @@
++.metadata/.plugins/org.eclipse.core.resources/.history/f1/2078375176480017131ddea8dea797b1
+ .metadata/

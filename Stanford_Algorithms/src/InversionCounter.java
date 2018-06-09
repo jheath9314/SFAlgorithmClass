@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class InversionCounter {
 
 	private long inversionCount = 0;
@@ -38,31 +36,20 @@ public class InversionCounter {
 		while (i < leftArray.length && j < rightArray.length) {
 
 			if (leftArray[i] < rightArray[j]) {
-				input[k] = leftArray[i];
-				k++;
-				i++;
+				input[k++] = leftArray[i++];
 
 			} else {
-				input[k] = rightArray[j];
-				j++;
-				k++;
+				input[k++] = rightArray[j++];
 				inversionCount += leftArray.length - i;
 			}
-
 		}
 
 		while (i < leftArray.length) {
-			input[k] = leftArray[i];
-			i++;
-			k++;
+			input[k++] = leftArray[i++];
 		}
-
+		
 		while (j < rightArray.length) {
-			input[k] = rightArray[j];
-			k++;
-			j++;
+			input[k++] = rightArray[j++];
 		}
-
 	}
-
 }
